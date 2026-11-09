@@ -1,0 +1,49 @@
+<div class="container mt-3">
+
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2">
+      <label>Titre de la chanson (en tapant)</label>
+      <input class="form-control" #champ (keyup)="onKeyUp(champ.value)">
+    </div>
+  </form>
+
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Artiste</th>
+            <th>Durée</th>
+            <th>Date Création</th>
+            <th>Genre</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (chanson of chansons; track chanson.idChanson)
+          {
+            <tr>
+              <td>{{chanson.idChanson}}</td>
+              <td>{{chanson.titre}}</td>
+              <td>{{chanson.artiste}}</td>
+              <td>{{chanson.duree}}</td>
+              <td>{{chanson.dateCreation | date:'dd/MM/yyyy'}}</td>
+              @if (chanson.genre) {
+                <td>{{chanson.genre.nomGenre}}</td>
+              }
+              @else {
+                <td>PAS DE GENRE</td>
+              }
+            </tr>
+          }
+          @empty {
+            <tr>
+              <td colspan="6"><h4>Aucune chanson trouvée !</h4></td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
